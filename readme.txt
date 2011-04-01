@@ -1,4 +1,4 @@
-=== ThemeKit For WordPress by themekitwp.com ===
+=== ThemeKit For WordPress ===
 Contributors: joshl, jaredharbour
 Tags: options, settings, management
 Requires at least: 3.0
@@ -16,10 +16,10 @@ For more information, check out [themekitwp.com](http://themekitwp.com/).
 Features include:
 
 * Integration with Google Fonts.
-* All options saved in a single place and image are save in a custom post type. 
+* All data is save in a single option and images are using a custom post type. 
 * Easily create options for almost anything.
 * Prebuilt controls for fonts, borders, text, checkboxes, radio buttons and more.
-* Customized version of the WordPress Media uploader for image management.
+* Customized version of the WordPress Media Uploader for image management.
 * and *many* more options to come!
 
 == Installation ==
@@ -40,8 +40,8 @@ If a plugin or theme developer used ThemeKit to power the settings they created 
 
 1. Settings screen style option one
 2. Settings screen style option two
-3. This is most of the form elements currently in ThemeKit. Their are a few missing. Should have them in the demo soon.
-4. Custom insert into option button used when uploading images.
+3. This is most of the form elements currently in ThemeKit.
+4. Custom "insert into option" button used when uploading images.
 5. Quick code sample showing basics of creating an options page.  
 
 
