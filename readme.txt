@@ -11,6 +11,8 @@ Supercharge your WordPress themes and plugins with powerful features that are ea
 
 [ThemeKit](http://themekitwp.com/) is a WordPress plugin that helps you supercharge your self-hosted WordPress themes and plugins by providing a uniform way to create options.
 
+NOTE: Some coding may be required unless the your theme or plugin has been setup to use ThemeKit.
+
 For more information, check out [themekitwp.com](http://themekitwp.com/).
 
 Features include:
