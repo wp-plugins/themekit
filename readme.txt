@@ -3,7 +3,7 @@ Contributors: joshl, jaredharbour
 Tags: options, settings, management
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.5
+Stable tag: 0.5.1
 
 Supercharge your WordPress themes and plugins with powerful features that are easy to create.
 
@@ -44,10 +44,12 @@ If a plugin or theme developer used ThemeKit to power the settings they created 
 4. Custom "insert into option" button used when uploading images.
 5. Quick code sample showing basics of creating an options page.  
 
-
-
-
 == Changelog ==
+
+= 0.5.1 =
+* Added option to set where the themekit menu gets added (defaults to Appearance)
+* Added description controller that prints the text thats passed to it to the page.
+* Added public function get_version() that returns the current plugin version.
 
 = 0.5 =
 * Initial release

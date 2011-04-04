@@ -4,7 +4,7 @@
  * Plugin URI: http://wordpress.org/extend/plugins/themekit/
  * Description: Build Kickass options in WordPress
  * Author: ThemekitWP
- * Version: 0.5
+ * Version: 0.5.1
  * Author URI: http://themekitwp.com
  * License: GPL2+
  * Text Domain: themekit
@@ -31,6 +31,8 @@ if( ! class_exists( 'ThemeKitForWP' ) ){
 		private $_options_page = '';
 		private $_context_help = '';
 		private $_this_options_page = false;
+		private $_menu_type = 'theme';
+		private $_version = "0.5.1";
 	
 		//Class Holders
 		private $_c_optionspage;
@@ -107,8 +109,45 @@ if( ! class_exists( 'ThemeKitForWP' ) ){
 	
 		//Build the Menu and Page Load Actions
 		public function admin_menu(){
+			switch ($this->_menu_type) {
+			    case 'dashboard':
+			        	$this->_options_page = add_dashboard_page($this->_menu_title, $this->_menu_title, 'administrator', $this->_option_name, array(&$this, 'load_options_page'));
+			    break;
+				case 'posts':
+			        $this->_options_page = add_posts_page($this->_menu_title, $this->_menu_title, 'administrator', $this->_option_name, array(&$this, 'load_options_page'));
+			    break;
+				case 'media':
+			        $this->_options_page = add_media_page($this->_menu_title, $this->_menu_title, 'administrator', $this->_option_name, array(&$this, 'load_options_page'));
+			    break;
+				case 'links':
+			        $this->_options_page = add_links_page($this->_menu_title, $this->_menu_title, 'administrator', $this->_option_name, array(&$this, 'load_options_page'));
+			    break;
+				case 'pages':
+			        $this->_options_page = add_pages_page($this->_menu_title, $this->_menu_title, 'administrator', $this->_option_name, array(&$this, 'load_options_page'));
+			    break;
+				case 'comments':
+			        $this->_options_page = add_comments_page($this->_menu_title, $this->_menu_title, 'administrator', $this->_option_name, array(&$this, 'load_options_page'));
+			    break;
+				case 'users':
+			        $this->_options_page = add_users_page($this->_menu_title, $this->_menu_title, 'administrator', $this->_option_name, array(&$this, 'load_options_page'));
+			    break;
+				case 'tools':
+			        $this->_options_page = add_management_page($this->_menu_title, $this->_menu_title, 'administrator', $this->_option_name, array(&$this, 'load_options_page'));
+			    break;
+			    case 'plugins':
+			        $this->_options_page = add_plugins_page($this->_menu_title, $this->_menu_title, 'administrator', $this->_option_name, array(&$this, 'load_options_page'));
+			    break;
+			    case 'settings':
+			        $this->_options_page = add_options_page($this->_menu_title, $this->_menu_title, 'administrator', $this->_option_name, array(&$this, 'load_options_page'));
+			    break;
+				default:
+					$this->_options_page = add_theme_page($this->_menu_title, $this->_menu_title, 'administrator', $this->_option_name, array(&$this, 'load_options_page'));
+				
+			}
 		
-			$this->_options_page = add_theme_page($this->_menu_title, $this->_menu_title, 'administrator', $this->_option_name, array(&$this, 'load_options_page'));	
+				
+			
+			
 			add_action("load-$this->_options_page", array(&$this, 'admin_load'));
 			add_action("load-$this->_options_page", array(&$this, 'handle_post_data'), 49);
 			add_action('admin_print_scripts-media-upload-popup', array(&$this, 'media_upload_change_script') );
@@ -120,7 +159,8 @@ if( ! class_exists( 'ThemeKitForWP' ) ){
 			wp_enqueue_script( "themekit_media_override" , plugins_url('media.js', __FILE__), false , "1.0" );
 
 		}
-	
+		
+				
 		//Saves-Resets the Options Data in the Database.
 		public function handle_post_data(){
 			$this->_c_optionssave->save();
@@ -142,6 +182,11 @@ if( ! class_exists( 'ThemeKitForWP' ) ){
 			$this->_c_cssengine->add_google_font_api();
 			echo $this->_c_cssengine->start();
 	
+		}
+		
+		public function get_css(){
+			return $this->_c_cssengine->start(true);
+			
 		}
 	
 		//Get Class if we haven't already loaded it.
@@ -169,6 +214,7 @@ if( ! class_exists( 'ThemeKitForWP' ) ){
 			$this->_options_array = $options;	
 		}
 	
+	
 		public function update_option( $name, $value = null){
 			return $this->_c_optionssave->update_option( $name, $value);
 		}
@@ -187,6 +233,15 @@ if( ! class_exists( 'ThemeKitForWP' ) ){
 		//Gets the Name of the theme from WordPress as set in style.css
 		private function set_theme_name(){
 			$this->_theme_name = get_current_theme();
+		}
+		
+		public function set_menu_type($menu_type){
+			$this->_menu_type = $menu_type;
+		}
+		
+		//Returns the Themekit version
+		public function get_version(){
+			return $this->_version;
 		}
 	
 		//Returns the Theme name that ThemeKitForWP is using

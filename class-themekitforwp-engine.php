@@ -48,6 +48,14 @@ class ThemeKitForWP_Engine {
 					$this->create_title( $value );
 				break;
 				
+				case "description":
+					$this->create_description( $value );
+				break;
+				
+				case "html":
+					$this->create_html( $value );
+				break;
+				
 				case 'text':
 					$this->create_text_input( $value );
 				break;
@@ -85,6 +93,10 @@ class ThemeKitForWP_Engine {
 					//$typography_stored = $tk_options[ $value['id'] ];
 					$this->create_font_selection( $value );
 				break;
+				case "cssdump":
+					$this->create_css_dump($value);
+				break;
+				
 				case "typography_old":
 				break;
 				   	
@@ -207,9 +219,40 @@ class ThemeKitForWP_Engine {
 	* @param array $value option currently being created
 	*/
 	private function create_title( $value ) { ?>
-		<h3><?php echo $value['desc']; ?></h3>		
+		<h3 class='tktitle'><?php echo $value['desc']; ?></h3>		
 	<?php }
-
+	
+	/**
+	*
+	* Option Description 
+	*
+	* @since 1.0.0 
+	*
+	* @access private
+	* @param array $value option currently being created
+	*/
+	private function create_description( $value ) { ?>
+		<p><?php echo $value['desc']; ?></p>		
+	<?php }
+	
+	
+	/**
+	*
+	* Option HTML 
+	*
+	* @since 1.0.0 
+	*
+	* @access private
+	* @param array $value option currently being created
+	*/
+	private function create_html( $value ) { 
+		echo $value['code'];
+	 }
+	
+	
+	
+	
+	
 	/**
 	*
 	* Text Input
@@ -238,16 +281,37 @@ class ThemeKitForWP_Engine {
 	*/
 	private function create_textarea( $value ) {	
 		$this->form_element_start( $value ); ?>
-		<textarea name="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" cols="" rows="">
-		<?php if (  $this->_saved_options[ $value['id']] != "") { 
-			echo stripslashes( $this->_saved_options[ $value['id']] ); 
+		<textarea name="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" cols="" rows=""><?php if (  $this->_saved_options[ $value['id']] != "") { echo stripslashes( $this->_saved_options[ $value['id']] ); 
 			} 
-			else { echo $value['std']; } ?>
-		</textarea>
+			else { echo $value['std']; } ?></textarea>
 	
 	<?php $this->form_element_end( $value );
 	}
 	
+	
+	/**
+	*
+	* CSS Dump
+	*
+	* @since 1.0.0 
+	*
+	* @access private
+	* @param array $value option currently being created
+	*/
+	private function create_css_dump( $value ) {	
+		$this->form_element_start( $value ); 
+		$css =  $this->_tk->get_css();
+		$css = trim($css);
+		$css =  str_replace("\t",'',$css);
+		
+		?>
+		<style><?php echo $css; ?></style>
+		<textarea name="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" cols="" rows=""><?php echo $css; ?></textarea>
+	
+	<?php $this->form_element_end( $value );
+	}
+	
+
 	/**
 	*
 	* Select

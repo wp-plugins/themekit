@@ -46,14 +46,11 @@
 	border-bottom: #dddddd 1px solid;
 	cursor: default;
 }
-.tk_open .tk_header h3{
+.tk_open .tk_header h3, .tktitle{
 	background: none;
 	font:normal 13pt Georgia;
 	padding:10px 0 10px 0px;
 	margin: 0px;
-	
-
-
 }
 
 .tk_header.minus h3{

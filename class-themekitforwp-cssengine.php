@@ -25,73 +25,76 @@ class ThemeKitForWP_CSSEngine {
 	* @since 1.0.0 
 	*
 	*/
-	public function start(){
+	public function start($css_only = false){
 		$saved = get_option( $this->_tk->get_option_name() );
 		$font_list = $this->_tk->get_fonts();
-		$styles = '<!-- THEMEKITFORWP STYLE OPTIONS '.$this->_tk->get_option_name().'-->
-		<style>';
+		$styles ='';
+		if ( false == $css_only ) {
+			$styles = '<!-- THEMEKITFORWP STYLE OPTIONS '.$this->_tk->get_option_name().'-->
+			<style>';
+		}
+		
 		foreach ($this->_tk->get_registered_options() as $k => $v) {
 			if( isset($v['selector']) ) {
-
-			$styles.= $v['selector'].'{';
+				$styles.= $v['selector'].'{';
 				switch( $v['style'] ){
 					case 'background-image':
-						$styles .= 'background-image: url("'.$saved[ $v[ "id" ] ].'");';
+						$styles .= ' background-image: url("'.$saved[ $v[ "id" ] ].'");';
 					break;
 					case 'background-color':
-						$styles .= 'background-color: '. $saved[ $v[ "id" ] ] .';';
+						$styles .= ' background-color: '. $saved[ $v[ "id" ] ] .';';
 					break;
 					case 'color':
-						$styles .= 'color: '. $saved[ $v[ "id" ] ] .';';
+						$styles .= ' color: '. $saved[ $v[ "id" ] ] .';';
 					break;
 					case 'border-top':
-						$styles .= 'border-top: '. $saved[ $v[ "id" ] ]["color"] .' '. $saved[ $v[ "id" ] ]["style"] .' '. $saved[ $v[ "id" ] ]["width"] .'px;';
+						$styles .= ' border-top: '. $saved[ $v[ "id" ] ]["color"] .' '. $saved[ $v[ "id" ] ]["style"] .' '. $saved[ $v[ "id" ] ]["width"] .'px;';
 					break;
 					case 'border-bottom':
-						$styles .= 'border-bottom: '. $saved[ $v[ "id" ] ]["color"] .' '. $saved[ $v[ "id" ] ]["style"] .' '. $saved[ $v[ "id" ] ]["width"] .'px;';
+						$styles .= ' border-bottom: '. $saved[ $v[ "id" ] ]["color"] .' '. $saved[ $v[ "id" ] ]["style"] .' '. $saved[ $v[ "id" ] ]["width"] .'px;';
 					break;
 					case 'border-left':
-						$styles .= 'border-left: '. $saved[ $v[ "id" ] ]["color"] .' '. $saved[ $v[ "id" ] ]["style"] .' '. $saved[ $v[ "id" ] ]["width"] .'px;';
+						$styles .= ' border-left: '. $saved[ $v[ "id" ] ]["color"] .' '. $saved[ $v[ "id" ] ]["style"] .' '. $saved[ $v[ "id" ] ]["width"] .'px;';
 					break;
 					case 'border-right':
-						$styles .= 'border-right: '. $saved[ $v[ "id" ] ]["color"] .' '. $saved[ $v[ "id" ] ]["style"] .' '. $saved[ $v[ "id" ] ]["width"] .'px;';
+						$styles .= ' border-right: '. $saved[ $v[ "id" ] ]["color"] .' '. $saved[ $v[ "id" ] ]["style"] .' '. $saved[ $v[ "id" ] ]["width"] .'px;';
 					break;
 					case 'font':
 						
 						if(isset( $saved[ $v[ "id" ] ]["underline"] )){
 							$decor =  $saved[ $v[ "id" ] ]["underline"];
 							if($decor == 'underline'){
-								$styles .= 'text-decoration: underline; ';
+								$styles .= ' text-decoration: underline; ';
 							} elseif($decor =='none'){
-								$styles .= 'text-decoration: none; ';
+								$styles .= ' text-decoration: none; ';
 							}
 						}
 						
 						if(isset( $saved[ $v[ "id" ] ]["style"])){
 							$style = $saved[ $v[ "id" ] ]["style"];
 							if($style == "bold"){
-								$styles .= 'font-weight: bold; ';
-								$styles .= 'font-style: normal; ';							
+								$styles .= ' font-weight: bold; ';
+								$styles .= ' font-style: normal; ';							
 							} elseif($style == "bold italic"){
-								$styles .= 'font-weight: bold; ';
-								$styles .= 'font-style: italic; ';							
+								$styles .= ' font-weight: bold; ';
+								$styles .= ' font-style: italic; ';							
 							} elseif($style == "italic"){
-								$styles .= 'font-weight: normal; ';
-								$styles .= 'font-style: italic; ';							
+								$styles .= ' font-weight: normal; ';
+								$styles .= ' font-style: italic; ';							
 							} else {
-								$styles .= 'font-weight: normal; ';
-								$styles .= 'font-style: normal; ';
+								$styles .= ' font-weight: normal; ';
+								$styles .= ' font-style: normal; ';
 							}
 						}
 							
 						if(isset($saved[ $v[ "id" ] ]["size"])){
-							$styles .= 'font-size: '. $saved[ $v[ "id" ] ]["size"] .'px; ';
+							$styles .= ' font-size: '. $saved[ $v[ "id" ] ]["size"] .'px; ';
 						}
 						
-						$styles .= 'color: '. $saved[ $v[ "id" ] ]["color"] .'; ';
+						$styles .= ' color: '. $saved[ $v[ "id" ] ]["color"] .'; ';
 						if(isset($saved[$v[ "id" ]]["face"] )){
 							if( $font_list[ $saved[$v[ "id" ]]["face"] ]["family"] ){
-								$styles .= 'font-family: '. $font_list[ $saved[$v[ "id" ]]["face"] ]["family"] .'; ';
+								$styles .= ' font-family: '. $font_list[ $saved[$v[ "id" ]]["face"] ]["family"] .'; ';
 							}
 						}
 						
@@ -105,11 +108,10 @@ class ThemeKitForWP_CSSEngine {
 			';
 			}
 		}
-		$styles .='</style>
-	<!-- END THEMEKITFORWP STYLE OPTIONS -->
-	';
+		if ( false == $css_only ) {
+			$styles .='</style><!-- END THEMEKITFORWP STYLE OPTIONS -->';
+		}
 		return $styles;
-
 	}
 
 
