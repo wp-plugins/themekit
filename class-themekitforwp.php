@@ -32,7 +32,7 @@ if( ! class_exists( 'ThemeKitForWP' ) ){
 		private $_context_help = '';
 		private $_this_options_page = false;
 		private $_menu_type = 'theme';
-		private $_version = "0.5.1";
+		private $_version = "0.5.2";
 	
 		//Class Holders
 		private $_c_optionspage;
