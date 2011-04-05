@@ -38,14 +38,24 @@ class ThemeKitForWP_CSSEngine {
 			if( isset($v['selector']) ) {
 				$styles.= $v['selector'].'{';
 				switch( $v['style'] ){
+					case 'add-style':
+						$styles .= $v['styles'];
+					break;
 					case 'background-image':
 						$styles .= ' background-image: url("'.$saved[ $v[ "id" ] ].'");';
 					break;
 					case 'background-color':
-						$styles .= ' background-color: '. $saved[ $v[ "id" ] ] .';';
+						$bgcolor = $saved[ $v[ "id" ] ];
+						if($bgcolor == '#'){
+							$styles .= ' background-color: none;';
+						}else{
+							$styles .= ' background-color: '. $bgcolor .';';
+						}
 					break;
 					case 'color':
-						$styles .= ' color: '. $saved[ $v[ "id" ] ] .';';
+						if($saved[ $v[ "id" ] ] !== '#'){
+							$styles .= ' color: '. $saved[ $v[ "id" ] ] .';';
+						}
 					break;
 					case 'border-top':
 						$styles .= ' border-top: '. $saved[ $v[ "id" ] ]["color"] .' '. $saved[ $v[ "id" ] ]["style"] .' '. $saved[ $v[ "id" ] ]["width"] .'px;';
@@ -91,7 +101,10 @@ class ThemeKitForWP_CSSEngine {
 							$styles .= ' font-size: '. $saved[ $v[ "id" ] ]["size"] .'px; ';
 						}
 						
-						$styles .= ' color: '. $saved[ $v[ "id" ] ]["color"] .'; ';
+						if($saved[ $v[ "id" ] ]["color"] !== '#'){
+							$styles .= ' color: '. $saved[ $v[ "id" ] ]["color"] .'; ';
+						}
+						
 						if(isset($saved[$v[ "id" ]]["face"] )){
 							if( $font_list[ $saved[$v[ "id" ]]["face"] ]["family"] ){
 								$styles .= ' font-family: '. $font_list[ $saved[$v[ "id" ]]["face"] ]["family"] .'; ';

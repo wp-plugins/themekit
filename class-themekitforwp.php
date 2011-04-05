@@ -4,7 +4,7 @@
  * Plugin URI: http://wordpress.org/extend/plugins/themekit/
  * Description: Build Kickass options in WordPress
  * Author: ThemekitWP
- * Version: 0.5.1
+ * Version: 0.5.2
  * Author URI: http://themekitwp.com
  * License: GPL2+
  * Text Domain: themekit

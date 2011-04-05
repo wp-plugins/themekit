@@ -3,15 +3,13 @@ Contributors: joshl, jaredharbour
 Tags: options, settings, management
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 0.5.1
+Stable tag: 0.5.2
 
 Supercharge your WordPress themes and plugins with powerful features that are easy to create.
 
 == Description ==
 
 [ThemeKit](http://themekitwp.com/) is a WordPress plugin that helps you supercharge your self-hosted WordPress themes and plugins by providing a uniform way to create options.
-
-NOTE: Some coding may be required unless the your theme or plugin has been setup to use ThemeKit.
 
 For more information, check out [themekitwp.com](http://themekitwp.com/).
 
@@ -47,6 +45,11 @@ If a plugin or theme developer used ThemeKit to power the settings they created 
 5. Quick code sample showing basics of creating an options page.  
 
 == Changelog ==
+
+= 0.5.2 =
+* Added support for CSS preview on options page
+* Added support for no background color. Options save as # sets css to background: none;
+* added new option type styleonly.
 
 = 0.5.1 =
 * Added option to set where the themekit menu gets added (defaults to Appearance)

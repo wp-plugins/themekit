@@ -39,9 +39,15 @@ class ThemeKitForWP_Fonts {
 			"warn"=> 0
 		);
 	
-		$fonts['Courier'] = array(
+		$fonts['Courier New'] = array(
 			"name" =>"Courier New",
 			"family"=> "Courier New, Courier New, monospace",
+			"type" => "standard",
+			"warn"=> 0
+		);
+		$fonts['Courier'] = array(
+			"name" =>"Courier",
+			"family"=> "Courier, MonoSpace",
 			"type" => "standard",
 			"warn"=> 0
 		);

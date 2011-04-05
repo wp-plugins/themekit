@@ -26,7 +26,7 @@ class ThemeKitForWP_OptionsPage {
 	*
 	*/
 	function create() {
-		if ( !empty($this->_tk->options_updated) ) echo '<div id="message" class="updated fade"><p><strong>' . $this->_tk->get_theme_name() . ' settings saved.</strong></p></div>';
+		if ( !empty($this->_tk->options_updated) ) echo '<div id="message" class="updated fade"><p><strong>Settings saved.</strong></p></div>';
 		//	if ( $_REQUEST['reset'] ) echo '<div id="message" class="updated fade"><p><strong>'.$themename.' settings reset.</strong></p></div>';
 		$option_created = get_option($this->_tk->get_option_name());
 		if( empty( $option_created ) ) {
